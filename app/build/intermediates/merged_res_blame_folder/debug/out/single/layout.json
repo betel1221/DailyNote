@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "com.example.dailynote.app-mergeDebugResources-51:/layout/item_note.xml",
+        "source": "com.example.dailynote.app-main-54:/layout/item_note.xml"
+    },
+    {
+        "merged": "com.example.dailynote.app-mergeDebugResources-51:/layout/item_quote.xml",
+        "source": "com.example.dailynote.app-main-54:/layout/item_quote.xml"
+    },
+    {
+        "merged": "com.example.dailynote.app-mergeDebugResources-51:/layout/fragment_dashboard.xml",
+        "source": "com.example.dailynote.app-main-54:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "com.example.dailynote.app-mergeDebugResources-51:/layout/activity_main.xml",
+        "source": "com.example.dailynote.app-main-54:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.dailynote.app-mergeDebugResources-51:/layout/fragment_notes.xml",
+        "source": "com.example.dailynote.app-main-54:/layout/fragment_notes.xml"
+    },
+    {
+        "merged": "com.example.dailynote.app-mergeDebugResources-51:/layout/fragment_favorites.xml",
+        "source": "com.example.dailynote.app-main-54:/layout/fragment_favorites.xml"
+    },
+    {
+        "merged": "com.example.dailynote.app-mergeDebugResources-51:/layout/fragment_settings.xml",
+        "source": "com.example.dailynote.app-main-54:/layout/fragment_settings.xml"
+    }
+]

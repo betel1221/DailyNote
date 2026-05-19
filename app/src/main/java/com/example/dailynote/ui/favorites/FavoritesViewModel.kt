@@ -1,0 +1,24 @@
+package com.example.dailynote.ui.favorites
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import com.example.dailynote.data.local.AppDatabase
+import com.example.dailynote.data.model.Note
+import com.example.dailynote.data.model.Quote
+import com.example.dailynote.repository.AppRepository
+
+class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val repository: AppRepository
+    val favoriteNotes: LiveData<List<Note>>
+    val favoriteQuotes: LiveData<List<Quote>>
+
+    init {
+        val noteDao = AppDatabase.getDatabase(application).noteDao()
+        val quoteDao = AppDatabase.getDatabase(application).quoteDao()
+        repository = AppRepository(noteDao, quoteDao)
+        favoriteNotes = repository.favoriteNotes
+        favoriteQuotes = repository.favoriteQuotes
+    }
+}
