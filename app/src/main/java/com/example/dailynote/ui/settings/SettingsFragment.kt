@@ -16,7 +16,13 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        val sharedPreferences = requireActivity().getSharedPreferences("settings", android.content.Context.MODE_PRIVATE)
+        val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
+        
+        binding.switchDarkMode.isChecked = isDarkMode
+
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            sharedPreferences.edit().putBoolean("dark_mode", isChecked).apply()
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {

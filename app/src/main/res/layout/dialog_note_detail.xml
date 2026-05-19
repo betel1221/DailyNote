@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="?android:attr/colorBackground">
+
+    <!-- Header / Action Buttons -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tv_dialog_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Work"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:background="#E0F2F1"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/btn_dialog_favorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_star_outline"
+                android:tint="?attr/colorPrimary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Favorite Button" />
+
+            <ImageButton
+                android:id="@+id/btn_dialog_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Delete Button"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Note Title -->
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Note Title"
+        android:textSize="22sp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Scrollable Note Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="300dp"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:id="@+id/tv_dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This is the note content..."
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="16sp"
+            android:lineSpacingMultiplier="1.25" />
+    </ScrollView>
+
+    <!-- Close Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_dialog_close"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Close"
+        app:cornerRadius="10dp"
+        android:backgroundTint="?attr/colorPrimary" />
+
+</LinearLayout>

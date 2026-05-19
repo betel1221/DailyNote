@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.dailynote.databinding.FragmentNotesBinding
 
 class NotesFragment : Fragment() {
@@ -34,11 +35,7 @@ class NotesFragment : Fragment() {
             if (title.isNotEmpty() && content.isNotEmpty()) {
                 viewModel.saveNote(title, content, category, isFavorite)
                 Toast.makeText(requireContext(), "Note Saved!", Toast.LENGTH_SHORT).show()
-                // Navigate back or clear fields
-                binding.etNoteTitle.text.clear()
-                binding.etNoteContent.text.clear()
-                binding.etNoteCategory.text.clear()
-                binding.cbFavorite.isChecked = false
+                findNavController().navigateUp()
             } else {
                 Toast.makeText(requireContext(), "Title and Content cannot be empty", Toast.LENGTH_SHORT).show()
             }

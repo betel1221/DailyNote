@@ -8,6 +8,9 @@ import com.example.dailynote.data.model.Note
 import com.example.dailynote.data.model.Quote
 import com.example.dailynote.repository.AppRepository
 
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+
 class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: AppRepository
@@ -21,4 +24,23 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
         favoriteNotes = repository.favoriteNotes
         favoriteQuotes = repository.favoriteQuotes
     }
+
+    fun updateNote(note: Note) {
+        viewModelScope.launch {
+            repository.updateNote(note)
+        }
+    }
+
+    fun deleteNote(note: Note) {
+        viewModelScope.launch {
+            repository.deleteNote(note)
+        }
+    }
+
+    fun deleteFavoriteQuote(quote: Quote) {
+        viewModelScope.launch {
+            repository.deleteFavoriteQuote(quote)
+        }
+    }
 }
+

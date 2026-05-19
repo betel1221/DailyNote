@@ -45,11 +45,24 @@ class AppRepository(
             if (response.isSuccessful && response.body() != null) {
                 response.body()
             } else {
-                null
+                getRandomFallbackQuote()
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            null
+            getRandomFallbackQuote()
         }
+    }
+
+    private fun getRandomFallbackQuote(): Quote {
+        val fallbacks = listOf(
+            Quote("fb1", "The only way to do great work is to love what you do.", "Steve Jobs"),
+            Quote("fb2", "Believe you can and you're halfway there.", "Theodore Roosevelt"),
+            Quote("fb3", "Success is not final, failure is not fatal: it is the courage to continue that counts.", "Winston Churchill"),
+            Quote("fb4", "It always seems impossible until it's done.", "Nelson Mandela"),
+            Quote("fb5", "Don't watch the clock; do what it does. Keep going.", "Sam Levenson"),
+            Quote("fb6", "You miss 100% of the shots you don't take.", "Wayne Gretzky"),
+            Quote("fb7", "The future belongs to those who believe in the beauty of their dreams.", "Eleanor Roosevelt")
+        )
+        return fallbacks.random()
     }
 }

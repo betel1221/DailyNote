@@ -11,19 +11,30 @@ import com.example.dailynote.data.model.Quote
 import com.example.dailynote.repository.AppRepository
 import kotlinx.coroutines.launch
 
+import androidx.lifecycle.switchMap
+
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: AppRepository
-    val allNotes: LiveData<List<Note>>
+    private val repository: AppRepository = AppRepository(
+        AppDatabase.getDatabase(application).noteDao(),
+        AppDatabase.getDatabase(application).quoteDao()
+    )
+    
+    val allNotes: LiveData<List<Note>> = repository.allNotes
     
     private val _dailyQuote = MutableLiveData<Quote?>()
     val dailyQuote: LiveData<Quote?> = _dailyQuote
 
+    private val searchQuery = MutableLiveData<String>("")
+    val filteredNotes: LiveData<List<Note>> = searchQuery.switchMap { query ->
+        if (query.isNullOrEmpty()) {
+            repository.allNotes
+        } else {
+            repository.searchNotes(query)
+        }
+    }
+
     init {
-        val noteDao = AppDatabase.getDatabase(application).noteDao()
-        val quoteDao = AppDatabase.getDatabase(application).quoteDao()
-        repository = AppRepository(noteDao, quoteDao)
-        allNotes = repository.allNotes
         fetchDailyQuote()
     }
 
@@ -34,6 +45,10 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun setSearchQuery(query: String) {
+        searchQuery.value = query
+    }
+
     fun searchNotes(query: String): LiveData<List<Note>> {
         return repository.searchNotes(query)
     }
@@ -42,6 +57,12 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             val favQuote = quote.copy(isFavorite = true)
             repository.insertFavoriteQuote(favQuote)
+        }
+    }
+
+    fun updateNote(note: Note) {
+        viewModelScope.launch {
+            repository.updateNote(note)
         }
     }
 
