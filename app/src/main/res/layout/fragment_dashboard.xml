@@ -1,128 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:background="?android:attr/colorBackground">
 
-    <!-- Motivational Quote Card -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_quote"
+    <!-- Main scrolling content -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="6dp"
-        app:strokeWidth="0dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Motivational Quote Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_quote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_quote_gradient"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tv_quote_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Loading Daily Quote..."
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:lineSpacingMultiplier="1.2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_quote_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Author"
+                        android:textColor="#E0E7FF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btn_favorite_quote"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_star_outline"
+                        android:tint="@android:color/white"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Favorite Quote Button" />
+                </RelativeLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Search + Sort Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_quote_gradient"
-            android:padding="20dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
 
-            <TextView
-                android:id="@+id/tv_quote_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Loading Daily Quote..."
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="italic"
-                android:lineSpacingMultiplier="1.2" />
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_search_bar"
+                android:hint="Search notes..."
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="8dp"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginEnd="8dp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <!-- Sort button -->
+            <ImageButton
+                android:id="@+id/btn_sort"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:tint="?attr/colorPrimary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Sort Notes" />
+
+        </LinearLayout>
+
+        <!-- Sort chips (hidden by default, toggled by sort button) -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_sort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sort_date_desc"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:text="Newest First"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sort_date_asc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oldest First"
+                style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sort_title_asc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A → Z"
+                style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sort_title_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Z → A"
+                style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Notes List / Empty State Frame -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false" />
+
+            <LinearLayout
+                android:id="@+id/layout_empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="24dp">
 
                 <TextView
-                    android:id="@+id/tv_quote_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerInParent="true"
-                    android:text="Author"
-                    android:textColor="#E0E7FF"
+                    android:text="📝"
+                    android:textSize="48sp"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No notes yet"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tap the + button to create your first note"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textColor="#888888"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="center" />
+            </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/btn_favorite_quote"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_star_outline"
-                    android:tint="@android:color/white"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Favorite Quote Button" />
-            </RelativeLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
 
-    <!-- Search Section -->
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/bg_search_bar"
-        android:hint="Search your notes..."
-        android:inputType="text"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="10dp"
-        android:textSize="16sp"
-        android:textColor="?android:attr/textColorPrimary"/>
+    </LinearLayout>
 
-    <!-- Notes List / Empty State Frame -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="16dp">
+    <!-- FAB for creating new note -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="@android:color/white"
+        android:contentDescription="Add Note"
+        app:backgroundTint="?attr/colorPrimary"
+        app:elevation="8dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_notes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-        <LinearLayout
-            android:id="@+id/layout_empty_state"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="gone"
-            android:padding="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📝"
-                android:textSize="48sp"
-                android:layout_marginBottom="12dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No notes found"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="?android:attr/textColorPrimary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tap 'Create Note' or adjust search query"
-                android:textSize="14sp"
-                android:textColor="#888888"
-                android:layout_marginTop="4dp"
-                android:textAlignment="center" />
-        </LinearLayout>
-    </FrameLayout>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

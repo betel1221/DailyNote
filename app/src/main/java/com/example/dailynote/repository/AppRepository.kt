@@ -27,9 +27,13 @@ class AppRepository(
         noteDao.deleteNote(note)
     }
 
-    fun searchNotes(query: String): LiveData<List<Note>> {
-        return noteDao.searchNotes(query)
-    }
+    fun searchNotes(query: String): LiveData<List<Note>> = noteDao.searchNotes(query)
+    fun getAllNotesSortedByDateAsc(): LiveData<List<Note>> = noteDao.getAllNotesSortedByDateAsc()
+    fun getAllNotesSortedByTitleAsc(): LiveData<List<Note>> = noteDao.getAllNotesSortedByTitleAsc()
+    fun getAllNotesSortedByTitleDesc(): LiveData<List<Note>> = noteDao.getAllNotesSortedByTitleDesc()
+    fun searchNotesByDateAsc(query: String): LiveData<List<Note>> = noteDao.searchNotesByDateAsc(query)
+    fun searchNotesByTitleAsc(query: String): LiveData<List<Note>> = noteDao.searchNotesByTitleAsc(query)
+    fun searchNotesByTitleDesc(query: String): LiveData<List<Note>> = noteDao.searchNotesByTitleDesc(query)
 
     suspend fun insertFavoriteQuote(quote: Quote) {
         quoteDao.insertQuote(quote)

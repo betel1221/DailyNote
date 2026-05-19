@@ -29,9 +29,13 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun setupRecyclerViews() {
-        noteAdapter = com.example.dailynote.ui.NoteAdapter { note ->
-            showNoteDetailDialog(note)
-        }
+        noteAdapter = com.example.dailynote.ui.NoteAdapter(
+            onItemClick = { note -> showNoteDetailDialog(note) },
+            onEditClick = { note ->
+                // In Favorites, tapping Edit shows the detail dialog (no nav action available here)
+                showNoteDetailDialog(note)
+            }
+        )
         quoteAdapter = com.example.dailynote.ui.QuoteAdapter()
 
         binding.recyclerViewFavoriteNotes.apply {
